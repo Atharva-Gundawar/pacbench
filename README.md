@@ -1,4 +1,4 @@
-# PACBench: Physical Attribute Comprehension Benchmark
+# PACBench: Properties Affordances Constraints Benchmark
 
 A comprehensive benchmark for evaluating Vision-Language Models (VLMs) on physical attribute understanding across three key capabilities: **Properties**, **Affordances**, and **Constraints**.
 
