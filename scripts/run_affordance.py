@@ -21,8 +21,8 @@ def evaluate_humanoid_affordances(client, model, num_samples, output_csv):
     """Evaluate affordance understanding for Humanoid dataset (dual cam)."""
     print("\nEvaluating affordances for Humanoid dataset...")
     
-    humanoid_affordance_gt = "pacbench/ground_truth/robo_affordances.psv"
-    humanoid_images_path = "pacbench/humanoid/captured_images"
+    humanoid_affordance_gt = "../pacbench/ground_truth/robo_affordances.psv"
+    humanoid_images_path = "../pacbench/humanoid/captured_images"
     
     df = pd.read_csv(humanoid_affordance_gt, sep="|")
     df.columns = [c.strip().lower() for c in df.columns]
@@ -91,8 +91,8 @@ def evaluate_robocasa_affordances(client, model, num_samples, output_csv):
     """Evaluate affordance understanding for RoboCasa dataset."""
     print("\nEvaluating affordances for RoboCasa dataset...")
     
-    robocasa_affordance_gt = "pacbench/ground_truth/syn_affordance.psv"
-    robocasa_path = "pacbench/robocasa_objects/object_views"
+    robocasa_affordance_gt = "../pacbench/ground_truth/syn_affordance.psv"
+    robocasa_path = "../pacbench/robocasa_objects/object_views"
     
     df = pd.read_csv(robocasa_affordance_gt, sep="|")
     df.columns = [c.strip().lower() for c in df.columns]
@@ -171,7 +171,7 @@ def main():
                         help="Model name to use for evaluation")
     parser.add_argument("--num_samples", type=int, default=None,
                         help="Number of samples to evaluate per dataset (default: all)")
-    parser.add_argument("--output_dir", type=str, default="affordance_results",
+    parser.add_argument("--output_dir", type=str, default="../affordance_results",
                         help="Directory to save results")
     parser.add_argument("--dataset", type=str, choices=["humanoid", "robocasa", "all"],
                         default="all", help="Which dataset to evaluate")

@@ -346,13 +346,13 @@ def main():
     parser = argparse.ArgumentParser(description="Verify VLM evaluation results using LLM")
     parser.add_argument("--model", type=str, default="meta-llama/llama-4-maverick",
                         help="Model name to use for verification")
-    parser.add_argument("--property_dir", type=str, default="property_results",
+    parser.add_argument("--property_dir", type=str, default="../property_results",
                         help="Directory containing property evaluation CSVs")
-    parser.add_argument("--affordance_dir", type=str, default="affordance_results",
+    parser.add_argument("--affordance_dir", type=str, default="../affordance_results",
                         help="Directory containing affordance evaluation CSVs")
-    parser.add_argument("--constraint_dir", type=str, default="constraint_results",
+    parser.add_argument("--constraint_dir", type=str, default="../constraint_results",
                         help="Directory containing constraint evaluation CSVs")
-    parser.add_argument("--output_dir", type=str, default="evaluations",
+    parser.add_argument("--output_dir", type=str, default="../evaluations",
                         help="Directory to save verification results")
     parser.add_argument("--task", type=str, choices=["properties", "affordances", "constraints", "all"],
                         default="all", help="Which task to verify")

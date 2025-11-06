@@ -173,9 +173,9 @@ def generate_affordance_summary(verification_csv):
 
 def main():
     parser = argparse.ArgumentParser(description="Generate summary tables from verification results")
-    parser.add_argument("--eval_dir", type=str, default="evaluations",
+    parser.add_argument("--eval_dir", type=str, default="../evaluations",
                         help="Directory containing verification CSVs")
-    parser.add_argument("--output_dir", type=str, default="evaluations",
+    parser.add_argument("--output_dir", type=str, default="../evaluations",
                         help="Directory to save summary tables")
     
     args = parser.parse_args()

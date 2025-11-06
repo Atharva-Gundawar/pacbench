@@ -11,8 +11,8 @@ def evaluate_humanoid_constraints(client, model, num_samples, output_csv):
     """Evaluate constraint reasoning for Humanoid dataset (dual cam)."""
     print("\nEvaluating constraints for Humanoid dataset...")
     
-    humanoid_constraints_gt = "pacbench/ground_truth/robo_constraints.psv"
-    humanoid_images_path = "pacbench/humanoid/captured_images"
+    humanoid_constraints_gt = "../pacbench/ground_truth/robo_constraints.psv"
+    humanoid_images_path = "../pacbench/humanoid/captured_images"
     
     df = pd.read_csv(humanoid_constraints_gt, sep="|")
     df.columns = [c.strip().lower() for c in df.columns]
@@ -88,8 +88,8 @@ def evaluate_sim_constraints(client, model, num_samples, output_csv):
     """Evaluate simulated constraint reasoning (MuJoCo / RoboCasa-style) with multi-view support."""
     print("\nEvaluating simulated constraint dataset...")
     
-    sim_constraints_gt = "pacbench/ground_truth/syn_constraints.psv"
-    sim_images_path = "pacbench/constraint_images"
+    sim_constraints_gt = "../pacbench/ground_truth/syn_constraints.psv"
+    sim_images_path = "../pacbench/constraint_images"
     
     df = pd.read_csv(sim_constraints_gt, sep="|")
     df.columns = [c.strip().lower() for c in df.columns]
@@ -165,7 +165,7 @@ def main():
                         help="Model name to use for evaluation")
     parser.add_argument("--num_samples", type=int, default=None,
                         help="Number of samples to evaluate per dataset (default: all)")
-    parser.add_argument("--output_dir", type=str, default="constraint_results",
+    parser.add_argument("--output_dir", type=str, default="../constraint_results",
                         help="Directory to save results")
     parser.add_argument("--dataset", type=str, choices=["humanoid", "simulated", "all"],
                         default="all", help="Which dataset to evaluate")

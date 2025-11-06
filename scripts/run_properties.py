@@ -23,8 +23,8 @@ def evaluate_openimages(client, model_name, num_samples, output_csv):
     """Evaluate property understanding on Open Images dataset."""
     print("\nStarting evaluation for Open Images dataset...")
     
-    properties_path = "pacbench/ground_truth"
-    images_base_path = "pacbench/open_images"
+    properties_path = "../pacbench/ground_truth"
+    images_base_path = "../pacbench/open_images"
     
     with open(output_csv, "w", newline="") as outfile:
         writer = csv.writer(outfile)
@@ -72,8 +72,8 @@ def evaluate_robocasa(client, model_name, num_samples, output_csv):
     """Evaluate property understanding on RoboCasa dataset."""
     print("\nStarting evaluation for RoboCasa dataset...")
     
-    robocasa_path = "pacbench/robocasa_objects/object_views"
-    robocasa_gt_file = "pacbench/ground_truth/syn_properties.psv"
+    robocasa_path = "../pacbench/robocasa_objects/object_views"
+    robocasa_gt_file = "../pacbench/ground_truth/syn_properties.psv"
     
     ground_truth_df = pd.read_csv(robocasa_gt_file, sep="|")
     ground_truth_df.columns = [c.strip().lower() for c in ground_truth_df.columns]
@@ -136,8 +136,8 @@ def evaluate_humanoid(client, model_name, num_samples, output_csv):
     """Evaluate property understanding on Humanoid dataset."""
     print("\nStarting evaluation for Humanoid dataset...")
     
-    humanoid_gt_file = "pacbench/ground_truth/robo_properties.psv"
-    humanoid_images_path = "pacbench/humanoid/captured_images"
+    humanoid_gt_file = "../pacbench/ground_truth/robo_properties.psv"
+    humanoid_images_path = "../pacbench/humanoid/captured_images"
     
     humanoid_df = pd.read_csv(humanoid_gt_file, sep="|")
     humanoid_df.columns = [c.strip().lower() for c in humanoid_df.columns]
@@ -198,7 +198,7 @@ def main():
                         help="Model name to use for evaluation")
     parser.add_argument("--num_samples", type=int, default=None,
                         help="Number of samples to evaluate per dataset (default: all)")
-    parser.add_argument("--output_dir", type=str, default="property_results",
+    parser.add_argument("--output_dir", type=str, default="../property_results",
                         help="Directory to save results")
     parser.add_argument("--dataset", type=str, choices=["openimages", "robocasa", "humanoid", "all"],
                         default="all", help="Which dataset to evaluate")

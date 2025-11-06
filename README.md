@@ -8,14 +8,15 @@ Hugging Face: https://huggingface.co/datasets/lens-lab/pacbench
 
 ```
 pacbench/
-├── run_properties.py          # Evaluate property understanding (color, weight, etc.)
-├── run_affordances.py          # Evaluate affordance predictions
-├── run_constraints.py          # Evaluate constraint reasoning
-├── verify_results.py           # LLM-based verification of results
-├── generate_summary_tables.py  # Generate accuracy summary tables
+├── scripts/                    # All Python scripts
+│   ├── run_properties.py       # Evaluate property understanding (color, weight, etc.)
+│   ├── run_affordance.py       # Evaluate affordance predictions
+│   ├── run_constraint.py       # Evaluate constraint reasoning
+│   ├── verify_results.py       # LLM-based verification of results
+│   ├── generate_performance.py # Generate accuracy summary tables
+│   ├── utils.py                # Utility functions for API calls
+│   └── config.py               # Configuration and constants
 ├── run_full_evaluation.sh      # Complete evaluation pipeline script
-├── utils.py                    # Utility functions for API calls
-├── config.py                   # Configuration and constants
 ├── requirements.txt            # Python dependencies
 ├── pacbench/                   # Dataset directory
 │   ├── ground_truth/           # Ground truth annotations
@@ -50,9 +51,36 @@ OPENROUTER_API_KEY=your_api_key_here
 
 ## 📊 Usage
 
-### Step 1: Run Evaluations
+### Quick Start: Run Full Evaluation Pipeline
 
-First, generate evaluation results by testing your VLM on the benchmark tasks:
+The easiest way to run the complete evaluation pipeline is using the shell script:
+
+```bash
+# Run full pipeline with all evaluations (properties, affordances, constraints)
+./run_full_evaluation.sh
+
+# With custom models and sample size
+./run_full_evaluation.sh meta-llama/llama-4-maverick meta-llama/llama-4-maverick 10 evaluations
+```
+
+Arguments:
+1. `EVAL_MODEL` - Model for evaluation (default: meta-llama/llama-4-maverick)
+2. `VERIFIER_MODEL` - Model for verification (default: meta-llama/llama-4-maverick)
+3. `NUM_SAMPLES` - Number of samples per dataset (default: all)
+4. `OUTPUT_DIR` - Output directory (default: evaluations)
+
+### Alternative: Run Individual Evaluations
+
+You can also run individual evaluation scripts from the `scripts/` directory:
+
+**Note:** All Python scripts are now in the `scripts/` directory. Change to that directory before running:
+```bash
+cd scripts/
+```
+
+#### Step 1: Run Evaluations
+
+Generate evaluation results by testing your VLM on the benchmark tasks:
 
 #### 1.1 Run Property Evaluations
 
@@ -74,10 +102,6 @@ python run_properties.py --model "gpt-4-vision-preview" --num_samples 10
 python run_properties.py --output_dir my_results
 ```
 
-**Evaluated Properties:**
-- COLOR, WEIGHT, HARDNESS, ORIENTATION
-- CONSUMABILITY, COMPLEXITY, CAPACITY
-- CONTENTS, SEALING, STICKINESS, etc.
 
 #### 1.2 Run Affordance Evaluations
 
@@ -85,14 +109,14 @@ Evaluate VLM predictions of object affordances:
 
 ```bash
 # Run all affordance evaluations
-python run_affordances.py
+python run_affordance.py
 
 # Run specific dataset
-python run_affordances.py --dataset humanoid
-python run_affordances.py --dataset robocasa
+python run_affordance.py --dataset humanoid
+python run_affordance.py --dataset robocasa
 
 # With custom settings
-python run_affordances.py --model "claude-3-opus" --num_samples 50
+python run_affordance.py --model "claude-3-opus" --num_samples 50
 ```
 
 #### 1.3 Run Constraint Evaluations
@@ -111,10 +135,6 @@ python run_constraints.py --dataset simulated
 python run_constraints.py --model "gpt-4" --num_samples 20
 ```
 
-**Features:**
-- Multi-camera evaluation (cam0, cam1, both)
-- Real-world humanoid scenarios
-- Simulated constraint scenarios
 
 ---
 
@@ -122,29 +142,6 @@ python run_constraints.py --model "gpt-4" --num_samples 20
 
 After running evaluations, verify results and generate comprehensive summaries.
 
-#### Option A: Automated Pipeline (Recommended)
-
-Run the complete verification and summary generation with a single command:
-
-```bash
-# Run full evaluation pipeline (default settings)
-./run_full_evaluation.sh
-
-# With custom verifier model
-./run_full_evaluation.sh gpt-4
-
-# Specify model and output directory
-./run_full_evaluation.sh "anthropic/claude-3-opus" my_evaluations
-```
-
-**The script automatically:**
-1. ✓ Verifies all results using LLM semantic matching
-2. ✓ Generates comprehensive summary tables by property/constraint type
-3. ✓ Creates overall benchmark summary across all tasks
-
-#### Option B: Manual Step-by-Step
-
-If you prefer to run verification and summary generation separately:
 
 **Step 2.1: Verify Results with LLM**
 
