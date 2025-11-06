@@ -2,6 +2,8 @@
 
 A comprehensive benchmark for evaluating Vision-Language Models (VLMs) on physical attribute understanding across three key capabilities: **Properties**, **Affordances**, and **Constraints**.
 
+Hugging Face: https://huggingface.co/datasets/lens-lab/pacbench
+
 ## 📁 Project Structure
 
 ```
